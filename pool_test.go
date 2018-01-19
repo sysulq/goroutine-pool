@@ -85,3 +85,48 @@ func BenchmarkGoroutine(b *testing.B) {
 		wg.Wait()
 	}
 }
+
+func BenchmarkPoolWithoutWait(b *testing.B) {
+	num := 10000
+	wp := WorkerPool{
+		MaxWorkersCount: 50000,
+	}
+	wp.Start()
+	wg := sync.WaitGroup{}
+
+	for i := 0; i < num; i++ {
+		wg.Add(1)
+		wp.Serve(func() {
+			wg.Done()
+		})
+	}
+	wg.Wait()
+	b.ResetTimer()
+
+	for k := 0; k < b.N; k++ {
+		// wg.Add(1)
+		// assert.True(b, wp.Serve(func() {
+		wp.Serve(func() {
+			rand.Int()
+			time.Sleep(1 * time.Microsecond)
+			// wg.Done()
+		})
+		// wg.Wait()
+	}
+
+}
+
+func BenchmarkGoroutineWithoutWait(b *testing.B) {
+	b.ResetTimer()
+
+	// wg := sync.WaitGroup{}
+	for k := 0; k < b.N; k++ {
+		// wg.Add(1)
+		go func() {
+			rand.Int()
+			time.Sleep(1 * time.Microsecond)
+			// wg.Done()
+		}()
+		// wg.Wait()
+	}
+}
