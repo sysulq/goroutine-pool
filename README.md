@@ -32,14 +32,14 @@ Success: Benchmarks passed.
 
 ### cpu run at 100%
 ```
-Running tool: D:\Go\bin\go.exe test -benchmem -run=^$ workerpool -bench ^BenchmarkGoroutine$
+Running tool: D:\Go\bin\go.exe test -benchmem -run=^$ workerpool -bench ^BenchmarkGoroutineWithoutWait$
 
 goos: windows
 goarch: amd64
 pkg: workerpool
-BenchmarkGoroutine-4   	 1000000	      3322 ns/op	     532 B/op	       1 allocs/op
+BenchmarkGoroutineWithoutWait-4   	 1000000	      4556 ns/op	     517 B/op	       1 allocs/op
 PASS
-ok  	workerpool	5.447s
+ok  	workerpool	5.649s
 Success: Benchmarks passed.
 ```
 
