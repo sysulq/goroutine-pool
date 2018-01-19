@@ -19,12 +19,14 @@ Success: Benchmarks passed.
 ```
 
 ```
+Running tool: D:\Go\bin\go.exe test -benchmem -run=^$ workerpool -bench ^BenchmarkPool$
+
 goos: windows
 goarch: amd64
 pkg: workerpool
-BenchmarkPool-4   	    2000	   1198307 ns/op	      17 B/op	       1 allocs/op
+BenchmarkPool-4   	    2000	   1146818 ns/op	      17 B/op	       1 allocs/op
 PASS
-ok  	workerpool	2.835s
+ok  	workerpool	2.702s
 Success: Benchmarks passed.
 ```
 
