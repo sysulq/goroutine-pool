@@ -1,4 +1,6 @@
 # goroutine-pool
+[![Build Status](https://travis-ci.org/hnlq715/goroutine-pool.svg?branch=master)](https://travis-ci.org/hnlq715/goroutine-pool)
+
 A simple goroutine pool which can create and release goroutine dynamically, inspired by fasthttp.
 
 # benchmarks
