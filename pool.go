@@ -130,8 +130,8 @@ func (wp *WorkerPool) clean(scratch *[]*workerChan) {
 	}
 }
 
-func Serve(c func()) { workerpool.Serve(c) }
-func (wp *WorkerPool) Serve(c func()) bool {
+func Go(c func()) { workerpool.Go(c) }
+func (wp *WorkerPool) Go(c func()) bool {
 	ch := wp.getCh()
 	if ch == nil {
 		return false

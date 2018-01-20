@@ -6,52 +6,39 @@ import (
 	"sync"
 	"testing"
 	"time"
-
-	"github.com/stretchr/testify/assert"
 )
 
 func TestCreate(t *testing.T) {
-	wp := WorkerPool{
-		MaxWorkersCount:       10,
-		MaxIdleWorkerDuration: 60 * time.Second,
-	}
-
-	wp.Start()
+	Start()
+	defer Stop()
 
 	for i := 0; i < 10; i++ {
-		assert.True(t, wp.Serve(func() {
+		Go(func() {
 			fmt.Println("hello")
-		}))
+		})
 	}
 }
 
 func TestStop(t *testing.T) {
-	wp := WorkerPool{
-		MaxWorkersCount: 10,
-	}
-
-	wp.Start()
+	Start()
+	defer Stop()
 
 	for i := 0; i < 10; i++ {
-		assert.True(t, wp.Serve(func() {
+		Go(func() {
 			fmt.Println("hello")
-		}))
+		})
 	}
-
-	wp.Stop()
 }
 
 func BenchmarkPool(b *testing.B) {
 	num := 10000
-	wp := WorkerPool{
-		MaxWorkersCount: 50000,
-	}
-	wp.Start()
+	Start()
+	defer Stop()
 	wg := sync.WaitGroup{}
 
 	for i := 0; i < num; i++ {
 		wg.Add(1)
-		wp.Serve(func() {
+		Go(func() {
 			wg.Done()
 		})
 	}
@@ -61,7 +48,7 @@ func BenchmarkPool(b *testing.B) {
 	for k := 0; k < b.N; k++ {
 		wg.Add(1)
 		// assert.True(b, wp.Serve(func() {
-		wp.Serve(func() {
+		Go(func() {
 			rand.Int()
 			time.Sleep(10 * time.Microsecond)
 			wg.Done()
@@ -88,15 +75,13 @@ func BenchmarkGoroutine(b *testing.B) {
 
 func BenchmarkPoolWithoutWait(b *testing.B) {
 	num := 10000
-	wp := WorkerPool{
-		MaxWorkersCount: 50000,
-	}
-	wp.Start()
+	Start()
+	defer Stop()
 	wg := sync.WaitGroup{}
 
 	for i := 0; i < num; i++ {
 		wg.Add(1)
-		wp.Serve(func() {
+		Go(func() {
 			wg.Done()
 		})
 	}
@@ -106,7 +91,7 @@ func BenchmarkPoolWithoutWait(b *testing.B) {
 	for k := 0; k < b.N; k++ {
 		// wg.Add(1)
 		// assert.True(b, wp.Serve(func() {
-		wp.Serve(func() {
+		Go(func() {
 			rand.Int()
 			time.Sleep(1 * time.Microsecond)
 			// wg.Done()
