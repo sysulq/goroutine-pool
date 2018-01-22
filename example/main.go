@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
-	pool "goroutine-pool"
 	"sync"
+
+	pool "github.com/hnlq715/goroutine-pool"
 )
 
 func main() {

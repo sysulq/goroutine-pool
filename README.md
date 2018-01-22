@@ -3,13 +3,17 @@
 
 A simple goroutine pool which can create and release goroutine dynamically, inspired by fasthttp.
 
+# install
+```
+go get -u -v github.com/hnlq715/goroutine-pool
+```
 # example
 ```
 package main
 
 import (
 	"fmt"
-	pool "goroutine-pool"
+	pool "github.com/hnlq715/goroutine-pool"
 	"sync"
 )
 
