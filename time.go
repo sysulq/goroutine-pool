@@ -5,10 +5,10 @@ import (
 	"time"
 )
 
-// CoarseTimeNow returns the current time truncated to the nearest second.
+// coarseTimeNow returns the current time truncated to the nearest second.
 //
 // This is a faster alternative to time.Now().
-func CoarseTimeNow() time.Time {
+func coarseTimeNow() time.Time {
 	tp := coarseTime.Load().(*time.Time)
 	return *tp
 }
