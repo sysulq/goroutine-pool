@@ -32,16 +32,21 @@ type workerChan struct {
 	ch          chan func()
 }
 
-var workerpool WorkerPool
+var (
+	once       sync.Once
+	workerpool *WorkerPool
+)
 
 func init() {
-	workerpool = WorkerPool{
-		MaxWorkersCount:       256 * 1024,
-		MaxIdleWorkerDuration: 10 * time.Second,
-	}
+	once.Do(func() {
+		workerpool = &WorkerPool{
+			MaxWorkersCount:       256 * 1024,
+			MaxIdleWorkerDuration: 10 * time.Second,
+		}
+		workerpool.Start()
+	})
 }
 
-func Start() { workerpool.Start() }
 func (wp *WorkerPool) Start() {
 	if wp.stopCh != nil {
 		panic("BUG: WorkerPool already started")
@@ -66,7 +71,6 @@ func (wp *WorkerPool) Start() {
 	}()
 }
 
-func Stop() { workerpool.Stop() }
 func (wp *WorkerPool) Stop() {
 	if wp.stopCh == nil {
 		panic("BUG: WorkerPool wasn't started")

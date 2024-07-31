@@ -9,9 +9,6 @@ import (
 )
 
 func TestCreate(t *testing.T) {
-	Start()
-	defer Stop()
-
 	for i := 0; i < 10; i++ {
 		Go(func() {
 			fmt.Println("hello")
@@ -20,9 +17,6 @@ func TestCreate(t *testing.T) {
 }
 
 func TestStop(t *testing.T) {
-	Start()
-	defer Stop()
-
 	for i := 0; i < 10; i++ {
 		Go(func() {
 			fmt.Println("hello")
@@ -32,8 +26,7 @@ func TestStop(t *testing.T) {
 
 func BenchmarkPool(b *testing.B) {
 	num := 10000
-	Start()
-	defer Stop()
+
 	wg := sync.WaitGroup{}
 
 	for i := 0; i < num; i++ {
@@ -55,7 +48,6 @@ func BenchmarkPool(b *testing.B) {
 		})
 		wg.Wait()
 	}
-
 }
 
 func BenchmarkGoroutine(b *testing.B) {
@@ -75,8 +67,7 @@ func BenchmarkGoroutine(b *testing.B) {
 
 func BenchmarkPoolWithoutWait(b *testing.B) {
 	num := 10000
-	Start()
-	defer Stop()
+
 	wg := sync.WaitGroup{}
 
 	for i := 0; i < num; i++ {
@@ -98,7 +89,6 @@ func BenchmarkPoolWithoutWait(b *testing.B) {
 		})
 		// wg.Wait()
 	}
-
 }
 
 func BenchmarkGoroutineWithoutWait(b *testing.B) {
