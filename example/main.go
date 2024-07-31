@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"sync"
 
-	pool "github.com/hnlq715/goroutine-pool"
+	pool "github.com/sysulq/goroutine-pool"
 )
 
 func main() {

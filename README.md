@@ -1,12 +1,12 @@
 # goroutine-pool
-[![Build Status](https://travis-ci.org/hnlq715/goroutine-pool.svg?branch=master)](https://travis-ci.org/hnlq715/goroutine-pool)
-[![Coverage](https://codecov.io/gh/hnlq715/goroutine-pool/branch/master/graph/badge.svg)](https://codecov.io/gh/hnlq715/goroutine-pool)
+[![Go](https://github.com/sysulq/goroutine-pool/actions/workflows/go.yml/badge.svg)](https://github.com/sysulq/goroutine-pool/actions/workflows/go.yml)
+[![Coverage](https://codecov.io/gh/sysulq/goroutine-pool/branch/master/graph/badge.svg)](https://codecov.io/gh/sysulq/goroutine-pool)
 
 A simple goroutine pool which can create and release goroutine dynamically, inspired by fasthttp.
 
 # install
 ```
-go get -u -v github.com/hnlq715/goroutine-pool
+go get -u -v github.com/sysulq/goroutine-pool
 ```
 # example
 ```
@@ -14,7 +14,7 @@ package main
 
 import (
 	"fmt"
-	pool "github.com/hnlq715/goroutine-pool"
+	pool "github.com/sysulq/goroutine-pool"
 	"sync"
 )
 

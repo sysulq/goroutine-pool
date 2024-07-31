@@ -1,3 +1,3 @@
-module github.com/hnlq715/goroutine-pool
+module github.com/sysulq/goroutine-pool
 
 go 1.18

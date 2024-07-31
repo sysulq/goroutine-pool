@@ -23,5 +23,8 @@ jobs:
       - name: Test
         run: go test -race -coverprofile=coverage.txt -covermode=atomic
 
-      - name: upload Codecov
-        run: bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v4.5.0
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: sysulq/goroutine-pool
